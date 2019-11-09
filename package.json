@@ -7,8 +7,7 @@
   },
   "main": "index.js",
   "dependencies": {
-    "optimist": "~0.6.0",
-    "bunyan": "~0.22.1"
+    "optimist": "~0.6.0"
   },
   "devDependencies": {},
   "scripts": {},
