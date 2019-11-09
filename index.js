@@ -1,22 +1,13 @@
 
 var http = require('http')
-  , bunyan = require('bunyan')
 
 module.exports = function (options) {
 
   options = options || {}
   var statusCode = options.permament ? 301 : 302
 
-  var logger = bunyan.createLogger(
-          { name: options.name || 'https-redirect'
-          , serializers: bunyan.stdSerializers
-          , level: options.silent ? bunyan.FATAL : bunyan.INFO
-          }
-        )
-
   var server = http.createServer(function (req, res) {
-    logger.info({ req: req })
-
+ 
     if (!req.headers.host) {
       res.statusCode = 400
       res.end()
@@ -30,10 +21,6 @@ module.exports = function (options) {
     res.setHeader('Content-Length', '0')
     res.setHeader('Location', location)
     res.end()
-  })
-
-  server.on('listening', function () {
-    logger.info(this.address(), 'listening')
   })
 
   return server
